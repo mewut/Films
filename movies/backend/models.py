@@ -4,7 +4,7 @@ from django.db import models
 
 class Category(models.Model):
     name = models.CharField('Категория', max_length=255)
-    description = models.CharField('Описание', max_length=255)
+    description = models.TextField('Описание', max_length=255)
     url = models.SlugField(max_length=155, unique=True)
 
     def __str__(self):
@@ -18,8 +18,7 @@ class Category(models.Model):
 class Actor(models.Model):
     name = models.CharField('Имя', max_length=255)
     age = models.PositiveSmallIntegerField('Возраст', default=0)
-    description = models.CharField('Описание', max_length=255)
-    url = models.SlugField(max_length=155, unique=True)
+    description = models.TextField('Описание', max_length=2255)
     image = models.ImageField('Изображение', upload_to='actors/')
 
     def __str__(self):
@@ -32,7 +31,7 @@ class Actor(models.Model):
 
 class Genre(models.Model):
     name = models.CharField('Жанр', max_length=255)
-    description = models.CharField('Описание', max_length=255)
+    description = models.TextField('Описание', max_length=255)
     url = models.SlugField(max_length=155, unique=True)
 
     def __str__(self):
@@ -46,9 +45,9 @@ class Genre(models.Model):
 class Movie(models.Model):
     title = models.CharField('Название', max_length=255)
     tagline = models.CharField('Слоган', max_length=255, default='')
-    description = models.CharField('Описание', max_length=255)
+    description = models.TextField('Описание', max_length=2255)
     poster = models.ImageField('Постер', upload_to='movies/')
-    year = models.PositiveSmallIntegerField('Дата выхода', default='1895')      # в этом году был снят первый в мире фильм - Прибытие поезда 
+    year = models.PositiveSmallIntegerField('Дата выхода', default='2000')
     country = models.CharField('Страна', max_length=155)                        # можно потом сделать список стран на выбор
     directors = models.ManyToManyField(Actor, verbose_name='режиссер', related_name='film_director')
     actors = models.ManyToManyField(Actor, verbose_name='актеры', related_name='actors')
